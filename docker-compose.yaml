@@ -1,0 +1,31 @@
+services:
+  tender-manager-db:
+    image: postgres:latest
+    container_name: tender-manager-db
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+      - PGPORT=5433
+    ports:
+      - "${DB_PORT}:5433"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+  tender-manager-api:
+    image: tender-manager-back:latest
+    container_name: tender-manager-api
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+      - DB_PORT=${DB_PORT}
+    depends_on:
+      - tender-manager-db
+    restart: unless-stopped
+
+volumes:
+  pg_data:

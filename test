@@ -1,0 +1,17 @@
+curl -X POST 'http://localhost:8000/v1/user' -H 'Content-Type: application/json' -d '{"user_type": "Artístico", "person_type": "Pessoa Física", "full_name": "John Doe", "email": "johndoe@example.com", "cell_phone": "123456789", "gender": "Homem Cisgênero", "password": "securepassword123"}'
+
+
+
+\l
+
+\c nome_do_banco
+
+
+
+docker exec -it tender-manager-db psql -U postgres 
+docker exec -it tender-manager-api /bin/sh
+
+curl http://localhost:8000/v1/ping
+
+psql -h localhost -p 5433 -U postgres -d tender_manager_db
+psql postgresql://postgres:password@localhost:5433/tender_manager_db
